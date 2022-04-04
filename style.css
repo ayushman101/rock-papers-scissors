@@ -1,0 +1,15 @@
+.container{
+    border: 2px solid black;
+    text-align: center;
+}
+
+#flex-box{
+    display:flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.image-btn{
+    border: 2px solid white;
+    padding: 0;
+}
