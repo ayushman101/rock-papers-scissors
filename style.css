@@ -7,9 +7,14 @@
     display:flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    margin: 10px 0px;
 }
 
 .image-btn{
     border: 2px solid white;
     padding: 0;
+}
+
+.image-btn:hover{
+    box-shadow: 0px 0px 20px blue;
 }
