@@ -142,7 +142,3 @@ function rock() {
         deleteimages();
     }
 }
-
-    //document.getElementById("btn-1").remove();
-    //document.getElementById("btn-0").remove();
-    //document.getElementById("btn-2").remove();
