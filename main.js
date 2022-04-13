@@ -10,27 +10,27 @@ function deleteimages() {
 
 
     let ele = document.createElement("button");
-    ele.setAttribute("id", "btn-0");
+    ele.setAttribute("id", "paper");
     ele.setAttribute("class", "image-btn");
-    ele.setAttribute("onclick", "hand()")
+    ele.setAttribute("onclick", "rps(this)")
     let img = document.createElement("img");
-    img.src = "hand.png";
+    img.src = "paper.png";
     ele.appendChild(img);
     flex.appendChild(ele);
 
     ele = document.createElement("button");
-    ele.setAttribute("id", "btn-1");
+    ele.setAttribute("id", "scissors");
     ele.setAttribute("class", "image-btn");
-    ele.setAttribute("onclick", "scissors()")
+    ele.setAttribute("onclick", "rps(this)")
     img = document.createElement("img");
     img.src = "scissors.png";
     ele.appendChild(img);
     flex.appendChild(ele);
 
     ele = document.createElement("button");
-    ele.setAttribute("id", "btn-2");
+    ele.setAttribute("id", "rock");
     ele.setAttribute("class", "image-btn");
-    ele.setAttribute("onclick", "rock()")
+    ele.setAttribute("onclick", "rps(this)")
     img = document.createElement("img");
     img.src = "rock.png";
     ele.appendChild(img);
@@ -42,31 +42,74 @@ function deleteimages() {
 
 
 
-function hand() {
+function rps(yourchoice) {
     if (start === 0) {
-        start = 1;
-        let comp = Math.floor(Math.random() * 3);
-        console.log(comp);
-        document.getElementById("btn-1").remove();
-        document.getElementById("btn-2").remove();
+        var database={
+            "rock":{
+                "scissors":1,
+                "rock":0.5,
+                "paper":0
+            },
+            "paper":{
+                "rock":1,
+                "paper":0.5,
+                "scissors":0
+            },
+            "scissors":{
+                "paper":1,
+                "scissors":0.5,
+                "rock":0
+            },
+        };  
 
-        if (comp === 0) {
+        start = 1;
+        let comp =["rock","scissors","paper"] [Math.floor(Math.random() * 3)];
+        console.log(comp);
+
+        var human=yourchoice.id;
+
+        document.getElementById("paper").remove();
+        document.getElementById("scissors").remove();
+        document.getElementById("rock").remove();
+
+        
+        var flex = document.getElementById("flex-box");
+        
+        let ele = document.createElement("button");
+        ele.setAttribute("id", `${human}`);
+        ele.setAttribute("class", "image-btn");
+        ele.setAttribute("onclick", "rps(this)")
+        
+        let img = document.createElement("img");
+        img.src = `${human}.png`;
+        ele.appendChild(img);
+        flex.appendChild(ele);
+        
+        
+        var score=database[human][comp];
+
+        if (score === 0) {
+            console.log("lost");
+    
+            let comp_chc = document.createElement("img");
+            comp_chc.src = `${comp}.png`;
+            document.getElementById("flex-box").appendChild(comp_chc);
+        
+        }
+        
+        else if (comp == 1) {
+            console.log("win");
+            
+            let comp_chc = document.createElement("img");
+            comp_chc.src = `${comp}.png`;
+            document.getElementById("flex-box").appendChild(comp_chc);
+        }
+        
+        else {
             console.log("tied");
+            
             let comp_chc = document.createElement("img");
-            comp_chc.src = "hand.png";
-            document.getElementById("flex-box").appendChild(comp_chc);
-            comp_chc.setAttribute("id", "btn-3");
-        }
-        else if (comp == 1) {
-            console.log("lost");
-            let comp_chc = document.createElement("img");
-            comp_chc.src = "scissors.png";
-            document.getElementById("flex-box").appendChild(comp_chc);
-        }
-        else {
-            console.log("win");
-            let comp_chc = document.createElement("img");
-            comp_chc.src = "rock.png";
+            comp_chc.src = `${comp}.png`;
             document.getElementById("flex-box").appendChild(comp_chc);
         }
     }
@@ -75,70 +118,4 @@ function hand() {
         deleteimages();
     }
 
-}
-function scissors() {
-    if (start === 0) {
-        start = 1;
-        let comp = Math.floor(Math.random() * 3);
-        console.log(comp);
-        document.getElementById("btn-0").remove();
-        document.getElementById("btn-2").remove();
-
-        if (comp === 0) {
-            console.log("win");
-            let comp_chc = document.createElement("img");
-            comp_chc.src = "hand.png";
-            document.getElementById("flex-box").appendChild(comp_chc);
-            comp_chc.setAttribute("id", "btn-3");
-        }
-        else if (comp == 1) {
-            console.log("tied");
-            let comp_chc = document.createElement("img");
-            comp_chc.src = "scissors.png";
-            document.getElementById("flex-box").appendChild(comp_chc);
-        }
-        else {
-            console.log("lost");
-            let comp_chc = document.createElement("img");
-            comp_chc.src = "rock.png";
-            document.getElementById("flex-box").appendChild(comp_chc);
-        }
-    }
-
-    else {
-        deleteimages();
-    }
-}
-function rock() {
-    if (start === 0) {
-        start = 1;
-        let comp = Math.floor(Math.random() * 3);
-        console.log(comp);
-        document.getElementById("btn-1").remove();
-        document.getElementById("btn-0").remove();
-
-        if (comp === 0) {
-            console.log("lost");
-            let comp_chc = document.createElement("img");
-            comp_chc.src = "hand.png";
-            document.getElementById("flex-box").appendChild(comp_chc);
-            comp_chc.setAttribute("id", "btn-3");
-        }
-        else if (comp == 1) {
-            console.log("win");
-            let comp_chc = document.createElement("img");
-            comp_chc.src = "scissors.png";
-            document.getElementById("flex-box").appendChild(comp_chc);
-        }
-        else {
-            console.log("tie");
-            let comp_chc = document.createElement("img");
-            comp_chc.src = "rock.png";
-            document.getElementById("flex-box").appendChild(comp_chc);
-        }
-    }
-
-    else {
-        deleteimages();
-    }
 }
